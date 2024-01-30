@@ -14,7 +14,7 @@ html {
 }
 
 .nav {
-  padding-top: 23px;
+  padding-top: 53px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,6 +31,11 @@ html {
 
 .active {
   font-weight: 700;
+}
+
+.tasks {
+  height: 400px;
+  overflow: auto;
 }
 
 .task {
@@ -71,4 +76,76 @@ html {
 .task__todo {
   color: black;
   font-weight: 600;
+}
+
+.add-task-btn {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-task-btn img {
+  width: 18px;
+  filter: brightness(0) saturate(100%) invert(28%) sepia(98%) saturate(6765%) hue-rotate(355deg) brightness(97%) contrast(123%);
+}
+
+.add-task-info {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+}
+
+.add-task-info__title {
+  width: 100%;
+  font-weight: 700;
+}
+
+.add-task-info__about {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.add-task-info__bot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-task-info__bot {
+  margin-top: 30px;
+}
+
+.add-task-info__category {
+  border: 1px solid #48a13a;
+  text-align: center;
+  color: #48a13a;
+  border-radius: 5px;
+  padding: 5px 8px;
+  width: 100px;
+}
+
+.add-task-info__category::placeholder {
+  color: #48a13a;
+}
+
+.add-task-do-btn {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}
+
+.add-task-do-btn button {
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.add-task-do-btn__cancel-btn {
+  background-color: #d4d4d4;
+}
+
+.add-task-do-btn__add-btn {
+  color: #e8e8e8;
+  background-color: #d45050;
 }

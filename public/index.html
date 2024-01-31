@@ -2,17 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/public/css/style.css" />
     <title>Document</title>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyDkzONXyynCaSoJvkmrVUOpvqn4q4ZLgVw",
+        authDomain: "todolist-4864e.firebaseapp.com",
+        databaseURL: "https://todolist-4864e-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "todolist-4864e",
+        storageBucket: "todolist-4864e.appspot.com",
+        messagingSenderId: "871382621428",
+        appId: "1:871382621428:web:7acb67fed5a693d7e812a1",
+      };
+
+      window.app = initializeApp(firebaseConfig);
+    </script>
   </head>
   <body>
     <nav class="nav">
       <div class="container">
         <div class="nav__menu">
-          <button class="nav__all">Все</button>
+          <button class="nav__all active">Все</button>
           <button class="nav__completed">Сделанные</button>
-          <button class="nav__not-completed active">Не сделанные</button>
+          <button class="nav__not-completed">Не сделанные</button>
         </div>
       </div>
     </nav>
@@ -48,21 +62,26 @@
             Добавить задачу
           </button>
 
-          <div class="add-task-info">
-            <input type="text" class="add-task-info__title" placeholder="Заголовок задачи" />
-            <input type="text" class="add-task-info__about" placeholder="Описание" />
-            <div class="add-task-info__bot">
-              <input type="text" class="add-task-info__category" placeholder="Сфера" />
-              <input type="date" class="add-task-info__date" />
+          <form class="add-task-info-wrap">
+            <div class="add-task-info">
+              <input type="text" name="title" class="add-task-info__title" placeholder="Заголовок задачи" required />
+              <input type="text" name="info" class="add-task-info__about" placeholder="Описание" required />
+              <div class="add-task-info__bot">
+                <input type="text" name="category" class="add-task-info__category" placeholder="Сфера" required />
+                <input type="date" name="date" class="add-task-info__date" required />
+              </div>
             </div>
-          </div>
-
-          <div class="add-task-do-btn">
-            <button class="add-task-do-btn__cancel-btn">Отмена</button>
-            <button class="add-task-do-btn__add-btn">Добавить</button>
-          </div>
+            <div class="add-task-do-btn">
+              <button class="add-task-do-btn__cancel-btn">Отмена</button>
+              <button type="submit" class="add-task-do-btn__add-btn" disabled>Добавить</button>
+            </div>
+          </form>
         </div>
       </div>
     </main>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.0/uuid.min.js"></script>
+
+  <script type="module" src="./js/components/addTask.js"></script>
+  <script type="module" src="./js/components/renderTasks.js"></script>
 </html>

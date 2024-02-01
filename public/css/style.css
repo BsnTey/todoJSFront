@@ -35,7 +35,7 @@ html {
 
 .tasks {
   height: 400px;
-  overflow: auto;
+  overflow: visible;
 }
 
 .task {
@@ -69,8 +69,37 @@ html {
   width: 26px;
 }
 
-.task__edit {
+.task__edit-wrap {
+  position: relative;
   padding: 0 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.show-edit {
+  display: none;
+  padding: 15px 20px;
+  position: absolute;
+  left: -175px;
+  top: -45px;
+
+  flex-direction: column;
+  gap: 15px;
+  background-color: #fcfcfc;
+}
+
+.active-edit {
+  display: flex;
+}
+
+.edit-task-btn {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-task-btn img {
+  width: 20px;
 }
 
 .task__todo {

@@ -1,14 +1,14 @@
-import { getData, transformData } from "./getData.js";
 import { updateTask } from "./changeTask.js";
 
 const tasks = document.querySelector(".tasks");
 
-const renderTasks = async (getTasks) => {
+export const renderTasks = async (getTasks) => {
   tasks.innerHTML = "";
 
   getTasks.forEach((taskItem) => {
     const task = document.createElement("div");
     task.className = "task";
+    task.id = taskItem.taskId;
     task.innerHTML = `
           <button class="task__progress">
              ${taskItem.status === true ? '<img src="./image/done.svg" alt="done" />' : '<img src="./image/inProgress.svg" alt="inProgress" />'}
@@ -24,9 +24,21 @@ const renderTasks = async (getTasks) => {
                   <p class="task__date">${taskItem.date}</p>
               </div>
           </div>
-          <button class="task__edit">
+          <div class="task__edit-wrap">
+            <button class="task__edit">
               <img src="./image/more.svg" alt="edit" />
-          </button>
+            </button>
+            <div class="show-edit">
+              <button class="edit-task-btn show-edit__edit-btn">
+                <img src="./image/edit.svg" alt="edit" />
+                Редактировать
+              </button>
+              <button class="edit-task-btn show-edit__remove-btn">
+                <img src="./image/delete.svg" alt="delete" />
+                Удалить
+              </button>
+            </div>
+          </div>
           `;
 
     const taskProgressBtn = task.querySelector(".task__progress");
@@ -37,15 +49,14 @@ const renderTasks = async (getTasks) => {
 };
 
 const updateAndRenderTask = async (task) => {
+  const newStatus = !task.status;
+  task.status = newStatus;
   updateTask({
     ...task,
-    status: !task.status,
+    status: newStatus,
   });
-  const tasksData = await getData();
-  const tasksTrans = transformData(tasksData);
-  renderTasks(tasksTrans);
+  const taskElement = document.getElementById(task.taskId);
+  const statusImg = taskElement.querySelector(".task__progress img");
+  statusImg.src = newStatus ? "./image/done.svg" : "./image/inProgress.svg";
+  statusImg.alt = newStatus ? "done" : "inProgress";
 };
-
-const tasksData = await getData();
-const tasksTrans = transformData(tasksData);
-renderTasks(tasksTrans);

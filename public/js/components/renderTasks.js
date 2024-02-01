@@ -1,4 +1,7 @@
 import { updateTask } from "./changeTask.js";
+import { removeTask } from "./removeTask.js";
+import { editTaskFromList } from "./editTask.js";
+
 
 const tasks = document.querySelector(".tasks");
 
@@ -6,10 +9,16 @@ export const renderTasks = async (getTasks) => {
   tasks.innerHTML = "";
 
   getTasks.forEach((taskItem) => {
-    const task = document.createElement("div");
-    task.className = "task";
-    task.id = taskItem.taskId;
-    task.innerHTML = `
+    const task = getNodeTask(taskItem);
+    tasks.appendChild(task);
+  });
+};
+
+export const getNodeTask = (taskItem) => {
+  const taskNode = document.createElement("div");
+  taskNode.className = "task";
+  taskNode.id = taskItem.taskId;
+  taskNode.innerHTML = `
           <button class="task__progress">
              ${taskItem.status === true ? '<img src="./image/done.svg" alt="done" />' : '<img src="./image/inProgress.svg" alt="inProgress" />'}
           </button>
@@ -41,17 +50,21 @@ export const renderTasks = async (getTasks) => {
           </div>
           `;
 
-    const taskProgressBtn = task.querySelector(".task__progress");
-    taskProgressBtn.addEventListener("click", async () => await updateAndRenderTask(taskItem));
+  const taskProgressBtn = taskNode.querySelector(".task__progress");
+  const showEditRemoveBtn = taskNode.querySelector(".show-edit__remove-btn");
+  const showEditBtn = taskNode.querySelector(".show-edit__edit-btn");
 
-    tasks.appendChild(task);
-  });
+  taskProgressBtn.addEventListener("click", async () => await updateTaskStatus(taskItem));
+  showEditRemoveBtn.addEventListener("click", async () => await removeTaskFromList(taskNode));
+  showEditBtn.addEventListener("click", async () => await editTaskFromList(taskItem));
+
+  return taskNode;
 };
 
-const updateAndRenderTask = async (task) => {
+const updateTaskStatus = async (task) => {
   const newStatus = !task.status;
   task.status = newStatus;
-  updateTask({
+  await updateTask({
     ...task,
     status: newStatus,
   });
@@ -59,4 +72,10 @@ const updateAndRenderTask = async (task) => {
   const statusImg = taskElement.querySelector(".task__progress img");
   statusImg.src = newStatus ? "./image/done.svg" : "./image/inProgress.svg";
   statusImg.alt = newStatus ? "done" : "inProgress";
+};
+
+const removeTaskFromList = async (taskNode) => {
+  const taskId = taskNode.getAttribute("id");
+  tasks.removeChild(taskNode);
+  await removeTask(taskId);
 };

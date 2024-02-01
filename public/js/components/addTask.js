@@ -1,6 +1,8 @@
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+import { getNodeTask } from "./renderTasks.js";
 
 const db = getDatabase();
+const tasks = document.querySelector(".tasks");
 
 const addTaskBtn = document.querySelector(".add-task-btn");
 const addTaskInfoWrap = document.querySelector(".add-task-info-wrap");
@@ -8,6 +10,7 @@ const addTaskDoBtnCancelBtn = document.querySelector(".add-task-do-btn__cancel-b
 
 addTaskBtn.addEventListener("click", () => {
   addTaskInfoWrap.style.display = "block";
+  clearForm(addTaskInfoWrap);
 });
 
 addTaskDoBtnCancelBtn.addEventListener("click", (event) => {
@@ -27,11 +30,13 @@ const handleFormSubmit = async (event) => {
   const dataSer = serializeForm(event.target);
   const data = transformData(dataSer);
   await sendData(data);
+  const nodeTask = getNodeTask(data);
+  tasks.appendChild(nodeTask);
 };
 
 addTaskInfoWrap.addEventListener("submit", handleFormSubmit);
 
-const serializeForm = (formNode) => {
+export const serializeForm = (formNode) => {
   const { elements } = formNode;
   const data = Array.from(elements)
     .filter((item) => !!item.name)
@@ -60,8 +65,6 @@ const transformData = (data) => {
 
   return transformData;
 };
-
-
 
 const sendData = async ({ taskId, title, info, category, date, status }) => {
   set(ref(db, "tasks/" + taskId), {

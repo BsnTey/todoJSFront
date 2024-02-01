@@ -24,6 +24,10 @@ html {
   padding: 5px 8px;
 }
 
+.nav__menu button:hover {
+  background-color: #e7e7e7;
+}
+
 .nav__completed {
   border-right: 1px solid #d4d4d4;
   border-left: 1px solid #d4d4d4;
@@ -38,11 +42,24 @@ html {
   overflow: visible;
 }
 
+.tasks__empty {
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+  font-size: 21px;
+}
+
 .task {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #d4d4d4;
   padding: 15px 5px;
+}
+
+.edit-task-form {
+  display: none;
+  margin-top: 30px;
+  font-size: 16px;
 }
 
 .task__info {
@@ -79,13 +96,10 @@ html {
 
 .show-edit {
   display: none;
-  padding: 15px 20px;
   position: absolute;
   left: -175px;
   top: -45px;
-
   flex-direction: column;
-  gap: 15px;
   background-color: #fcfcfc;
 }
 
@@ -94,8 +108,13 @@ html {
 }
 
 .edit-task-btn {
+  padding: 10px 20px;
   display: flex;
   gap: 8px;
+}
+
+.edit-task-btn:hover {
+  background-color: #e6e6e6;
 }
 
 .edit-task-btn img {

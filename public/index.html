@@ -24,9 +24,9 @@
     <nav class="nav">
       <div class="container">
         <div class="nav__menu">
-          <button class="nav__all active">Все</button>
+          <button class="nav__all">Все</button>
           <button class="nav__completed">Сделанные</button>
-          <button class="nav__not-completed">Не сделанные</button>
+          <button class="nav__not-completed active">Не сделанные</button>
         </div>
       </div>
     </nav>
@@ -69,23 +69,39 @@
             </div> -->
           </div>
 
-          <button class="add-task-btn">
-            <img src="./image/plus.svg" alt="plus" />
-            Добавить задачу
-          </button>
+          <div class="add-task">
+            <button class="add-task-btn">
+              <img src="./image/plus.svg" alt="plus" />
+              Добавить задачу
+            </button>
 
-          <form class="add-task-info-wrap">
+            <form class="add-task-info-wrap">
+              <div class="add-task-info">
+                <input type="text" name="title" class="add-task-info__title" placeholder="Заголовок задачи" required />
+                <input type="text" name="info" class="add-task-info__about" placeholder="Описание" required />
+                <div class="add-task-info__bot">
+                  <input type="text" name="category" class="add-task-info__category" placeholder="Сфера" required />
+                  <input type="date" name="date" class="add-task-info__date" required />
+                </div>
+              </div>
+              <div class="add-task-do-btn">
+                <button class="add-task-do-btn__cancel-btn">Отмена</button>
+                <button type="submit" class="add-task-do-btn__add-btn" disabled>Добавить</button>
+              </div>
+            </form>
+          </div>
+          <form class="edit-task-form">
             <div class="add-task-info">
-              <input type="text" name="title" class="add-task-info__title" placeholder="Заголовок задачи" required />
-              <input type="text" name="info" class="add-task-info__about" placeholder="Описание" required />
+              <input type="text" name="title" class="add-task-info__title" required />
+              <input type="text" name="info" class="add-task-info__about" required />
               <div class="add-task-info__bot">
-                <input type="text" name="category" class="add-task-info__category" placeholder="Сфера" required />
+                <input type="text" name="category" class="add-task-info__category" required />
                 <input type="date" name="date" class="add-task-info__date" required />
               </div>
             </div>
             <div class="add-task-do-btn">
               <button class="add-task-do-btn__cancel-btn">Отмена</button>
-              <button type="submit" class="add-task-do-btn__add-btn" disabled>Добавить</button>
+              <button type="submit" class="add-task-do-btn__add-btn">Сохранить</button>
             </div>
           </form>
         </div>
@@ -96,5 +112,4 @@
 
   <script type="module" src="./js/components/main.js"></script>
   <script type="module" src="./js/components/addTask.js"></script>
-  <!-- <script type="module" src="./js/components/renderTasks.js"></script> -->
 </html>
